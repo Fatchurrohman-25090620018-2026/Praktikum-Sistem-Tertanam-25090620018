@@ -17,8 +17,6 @@
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -27,28 +25,36 @@ entity alu4 is
     Port ( 
         a      : in  STD_LOGIC_VECTOR (3 downto 0);
         b      : in  STD_LOGIC_VECTOR (3 downto 0);
-        opcode : in  STD_LOGIC; -- '0' = tambah, '1' = kurang
-        result : out STD_LOGIC_VECTOR (3 downto 0);
-        carry  : out STD_LOGIC
+        opcode : in  STD_LOGIC_VECTOR (1 downto 0); -- Opcode diubah jadi 2-bit
+        result : out STD_LOGIC_VECTOR (7 downto 0)  -- Result diubah jadi 8-bit
     );
 end alu4;
 
 architecture Behavioral of alu4 is
-    signal a_u, b_u : unsigned (3 downto 0);
-    signal sum_ext : unsigned (4 downto 0);
 begin
-    a_u <= unsigned(a);
-    b_u <= unsigned(b);
-
-    process(a_u, b_u, opcode)
+    process(a, b, opcode)
+        variable a_uns, b_uns : unsigned(3 downto 0);
+        variable res_mult     : unsigned(7 downto 0);
+        variable res_add_sub  : unsigned(4 downto 0);
     begin
-        if opcode = '0' then
-            sum_ext <= ('0' & a_u) + ('0' & b_u);
-        else
-            sum_ext <= ('0' & a_u) - ('0' & b_u);
-        end if;
-    end process;
+        a_uns := unsigned(a);
+        b_uns := unsigned(b);
+        
+        case opcode is
+            when "00" => -- Penjumlahan (A + B)
+                res_add_sub := resize(a_uns, 5) + resize(b_uns, 5);
+                result      <= std_logic_vector(resize(res_add_sub, 8));
 
-    result <= STD_LOGIC_VECTOR(sum_ext(3 downto 0));
-    carry  <= sum_ext(4);
+            when "01" => -- Pengurangan (A - B)
+                res_add_sub := resize(a_uns, 5) - resize(b_uns, 5);
+                result      <= std_logic_vector(resize(res_add_sub, 8));
+
+            when "10" => -- Perkalian (A * B)
+                res_mult := a_uns * b_uns;
+                result   <= std_logic_vector(res_mult);
+
+            when others =>
+                result <= (others => '0');
+        end case;
+    end process;
 end Behavioral;
