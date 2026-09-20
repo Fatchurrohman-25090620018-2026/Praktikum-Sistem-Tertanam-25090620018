@@ -25,7 +25,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity leading_one_detector is
     Generic (WIDTH : integer := 8);
-    Port (
+    Port ( 
         din   : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
         pos   : out STD_LOGIC_VECTOR (2 downto 0);
         valid : out STD_LOGIC
@@ -38,6 +38,7 @@ begin
     begin
         pos   <= (others => '0');
         valid <= '0';
+        
         for i in WIDTH-1 downto 0 loop
             if din(i) = '1' then
                 pos   <= STD_LOGIC_VECTOR(to_unsigned(i, 3));
