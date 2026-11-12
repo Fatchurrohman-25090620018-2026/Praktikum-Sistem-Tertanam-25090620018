@@ -1,0 +1,50 @@
+## Clock 100 MHz
+set_property PACKAGE_PIN W5 [get_ports clk_100MHz]
+set_property IOSTANDARD LVCMOS33 [get_ports clk_100MHz]
+create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} [get_ports clk_100MHz]
+
+## Reset (tombol tengah btnC, aktif HIGH)
+set_property PACKAGE_PIN U18 [get_ports reset_rtl_0_0]
+set_property IOSTANDARD LVCMOS33 [get_ports reset_rtl_0_0]
+
+## LED 0 - 15 (gpio_out dari reg0)
+set_property PACKAGE_PIN U16 [get_ports {gpio_out_0[0]}]
+set_property PACKAGE_PIN E19 [get_ports {gpio_out_0[1]}]
+set_property PACKAGE_PIN U19 [get_ports {gpio_out_0[2]}]
+set_property PACKAGE_PIN V19 [get_ports {gpio_out_0[3]}]
+set_property PACKAGE_PIN W18 [get_ports {gpio_out_0[4]}]
+set_property PACKAGE_PIN U15 [get_ports {gpio_out_0[5]}]
+set_property PACKAGE_PIN U14 [get_ports {gpio_out_0[6]}]
+set_property PACKAGE_PIN V14 [get_ports {gpio_out_0[7]}]
+set_property PACKAGE_PIN V13 [get_ports {gpio_out_0[8]}]
+set_property PACKAGE_PIN V3  [get_ports {gpio_out_0[9]}]
+set_property PACKAGE_PIN W3  [get_ports {gpio_out_0[10]}]
+set_property PACKAGE_PIN U3  [get_ports {gpio_out_0[11]}]
+set_property PACKAGE_PIN P3  [get_ports {gpio_out_0[12]}]
+set_property PACKAGE_PIN N3  [get_ports {gpio_out_0[13]}]
+set_property PACKAGE_PIN P1  [get_ports {gpio_out_0[14]}]
+set_property PACKAGE_PIN L1  [get_ports {gpio_out_0[15]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {gpio_out_0[*]}]
+
+## Switch 0 - 15 (sw ke reg1, Tugas 1)
+set_property PACKAGE_PIN V17 [get_ports {sw_0[0]}]
+set_property PACKAGE_PIN V16 [get_ports {sw_0[1]}]
+set_property PACKAGE_PIN W16 [get_ports {sw_0[2]}]
+set_property PACKAGE_PIN W17 [get_ports {sw_0[3]}]
+set_property PACKAGE_PIN W15 [get_ports {sw_0[4]}]
+set_property PACKAGE_PIN V15 [get_ports {sw_0[5]}]
+set_property PACKAGE_PIN W14 [get_ports {sw_0[6]}]
+set_property PACKAGE_PIN W13 [get_ports {sw_0[7]}]
+set_property PACKAGE_PIN V2  [get_ports {sw_0[8]}]
+set_property PACKAGE_PIN T3  [get_ports {sw_0[9]}]
+set_property PACKAGE_PIN T2  [get_ports {sw_0[10]}]
+set_property PACKAGE_PIN R3  [get_ports {sw_0[11]}]
+set_property PACKAGE_PIN W2  [get_ports {sw_0[12]}]
+set_property PACKAGE_PIN U1  [get_ports {sw_0[13]}]
+set_property PACKAGE_PIN T1  [get_ports {sw_0[14]}]
+set_property PACKAGE_PIN R2  [get_ports {sw_0[15]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sw_0[*]}]
+
+## Konfigurasi board
+set_property CFGBVS VCCO [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
